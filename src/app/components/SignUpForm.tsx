@@ -8,7 +8,7 @@ export default function SignUpForm() {
 		const response = await register(formData);
 
 		if (response?.error) {
-			toast.error(response.error);
+			return toast.error(response.error);
 		}
 
 		toast.success('Account successfully created');
