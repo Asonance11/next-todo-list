@@ -1,5 +1,6 @@
 'use server';
 
+import bcrypt from 'bcrypt';
 import { redirect } from 'next/navigation';
 import { z } from 'zod';
 import prisma from './prisma';
@@ -50,8 +51,16 @@ export const register = async (formData: FormData) => {
 		};
 	}
 
+	const hashedPassword = await bcrypt.hash(
+		validatedUser.data.hashedPassword,
+		10
+	);
+
 	await prisma.user.create({
-		data: validatedUser.data,
+		data: {
+			username: validatedUser.data.username,
+			hashedPassword,
+		},
 	});
 
 	redirect('/signin');
