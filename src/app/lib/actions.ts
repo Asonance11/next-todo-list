@@ -1,6 +1,8 @@
 'use server';
 
 import bcrypt from 'bcrypt';
+import { AuthError } from 'next-auth';
+import { signIn } from 'next-auth/react';
 import { redirect } from 'next/navigation';
 import prisma from './prisma';
 import { UserSchema } from './zod.types';
@@ -48,4 +50,40 @@ export const register = async (formData: FormData) => {
 	});
 
 	redirect('/signin');
+};
+
+export const login = async (formData: FormData) => {
+	const validatedFields = UserSchema.safeParse(formData);
+
+	if (!validatedFields.success) {
+		let errorMessage = '';
+
+		validatedFields.error.issues.forEach((issue) => {
+			errorMessage += issue.message + '.';
+		});
+
+		return {
+			error: errorMessage,
+		};
+	}
+
+	const { username, hashedPassword } = validatedFields.data;
+
+	try {
+		await signIn('credentials', {
+			username,
+			hashedPassword,
+		});
+	} catch (error) {
+		if (error instanceof AuthError) {
+			switch (error.type) {
+				case 'CredentialsSignin':
+					return { error: 'Invalid Credentials' };
+				default:
+					return { error: 'Something went wrong' };
+			}
+		}
+
+		throw error;
+	}
 };
