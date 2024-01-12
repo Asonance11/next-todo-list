@@ -1,8 +1,8 @@
 'use server';
 
+import { signIn } from '@/auth';
 import bcrypt from 'bcrypt';
 import { AuthError } from 'next-auth';
-import { signIn } from 'next-auth/react';
 import { redirect } from 'next/navigation';
 import prisma from './prisma';
 import { UserSchema } from './zod.types';
@@ -53,7 +53,10 @@ export const register = async (formData: FormData) => {
 };
 
 export const login = async (formData: FormData) => {
-	const validatedFields = UserSchema.safeParse(formData);
+	const validatedFields = UserSchema.safeParse({
+		username: formData.get('username'),
+		hashedPassword: formData.get('password'),
+	});
 
 	if (!validatedFields.success) {
 		let errorMessage = '';
