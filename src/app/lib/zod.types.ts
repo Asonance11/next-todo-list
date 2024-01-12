@@ -16,4 +16,11 @@ export const UserSchema = z.object({
 	}),
 });
 
+export const TodoSchema = z.object({
+	title: z.string().min(1, {
+		message: 'Title must be at least 1 character long',
+	}),
+});
+
 export type User = z.infer<typeof UserSchema>;
+export type Todo = z.infer<typeof TodoSchema>;
