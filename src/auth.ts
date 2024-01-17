@@ -4,12 +4,38 @@ import { PrismaAdapter } from '@auth/prisma-adapter';
 import bcrypt from 'bcrypt';
 import NextAuth from 'next-auth';
 import credentials from 'next-auth/providers/credentials';
+import { getUserById } from './app/lib/data';
 import authConfig from './auth.config';
 
 export const { auth, signIn, signOut } = NextAuth({
 	adapter: PrismaAdapter(prisma),
 	session: { strategy: 'jwt' },
 	...authConfig,
+
+	callbacks: {
+		async session({ session, token }) {
+			if (token.sub && session.user) {
+				session.user.id = token.sub;
+			}
+
+			if (token.username && session.user) {
+				session.user.username = token.username as string;
+			}
+
+			return session;
+		},
+		async jwt({ token }) {
+			if (!token.sub) return token;
+
+			const existingUser = await getUserById(token.sub);
+
+			if (!existingUser) return token;
+
+			token.username = existingUser.username;
+
+			return token;
+		},
+	},
 
 	providers: [
 		credentials({
