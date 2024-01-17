@@ -1,11 +1,11 @@
 'use server';
 
-import { signIn } from '@/auth';
+import { signIn, signOut } from '@/auth';
 import bcrypt from 'bcrypt';
 import { AuthError } from 'next-auth';
 import { redirect } from 'next/navigation';
 import prisma from './prisma';
-import { UserSchema } from './zod.types';
+import { TodoSchema, UserSchema } from './zod.types';
 
 export const register = async (formData: FormData) => {
 	const validatedUser = UserSchema.safeParse({
@@ -89,4 +89,31 @@ export const login = async (formData: FormData) => {
 
 		throw error;
 	}
+};
+
+const createTodo = async (formData: FormData) => {
+	const validatedTodo = TodoSchema.safeParse({
+		title: formData.get('title'),
+	});
+
+	if (!validatedTodo.success) {
+		let errorMessage = '';
+
+		validatedTodo.error.issues.forEach((issue) => {
+			errorMessage += issue.message + '.';
+		});
+
+		return {
+			error: errorMessage,
+		};
+	}
+
+	const { title } = validatedTodo.data;
+
+	try {
+	} catch (error) {}
+};
+
+export const logout = async () => {
+	await signOut();
 };
