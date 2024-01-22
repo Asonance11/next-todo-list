@@ -1,11 +1,10 @@
 'use client';
 
 import Link from 'next/link';
-import { useCurrentUser } from '../hooks/useCurrentUser';
-import { logout } from '../lib/actions';
+import Navlinks from './Navlinks';
 
 export default function Navbar() {
-	const user = useCurrentUser();
+	// const user = useCurrentUser();
 
 	return (
 		<nav className="sticky bg-zinc-950 flex items-center justify-between py-4 px-8">
@@ -13,7 +12,7 @@ export default function Navbar() {
 				Todoist{' '}
 			</Link>
 
-			{user ? (
+			{/* {user ? (
 				<ul className="flex items-center gap-6 ">
 					<li>
 						<button
@@ -40,7 +39,8 @@ export default function Navbar() {
 						</Link>
 					</li>
 				</ul>
-			)}
+			)} */}
+			<Navlinks />
 		</nav>
 	);
 }
