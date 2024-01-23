@@ -1,11 +1,13 @@
 'use client';
 
+import { useSession } from 'next-auth/react';
 import Link from 'next/link';
-import { useCurrentUser } from '../hooks/useCurrentUser';
 import { logout } from '../lib/actions';
 
 const Navlinks = () => {
-	const user = useCurrentUser();
+	// const user = useCurrentUser();
+	const session = useSession();
+	const user = session.data?.user;
 
 	if (user) {
 		return (

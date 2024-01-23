@@ -109,9 +109,6 @@ const createTodo = async (formData: FormData) => {
 	}
 
 	const { title } = validatedTodo.data;
-
-	try {
-	} catch (error) {}
 };
 
 export const logout = async () => {

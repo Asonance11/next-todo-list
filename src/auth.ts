@@ -7,7 +7,12 @@ import credentials from 'next-auth/providers/credentials';
 import { getUserById } from './app/lib/data';
 import authConfig from './auth.config';
 
-export const { auth, signIn, signOut } = NextAuth({
+export const {
+	handlers: { GET, POST },
+	auth,
+	signIn,
+	signOut,
+} = NextAuth({
 	adapter: PrismaAdapter(prisma),
 	session: { strategy: 'jwt' },
 	...authConfig,
