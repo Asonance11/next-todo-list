@@ -1,9 +1,7 @@
-'use client';
-
 import Link from 'next/link';
 import Navlinks from './Navlinks';
 
-export default function Navbar() {
+export default async function Navbar() {
 	// const user = useCurrentUser();
 
 	return (

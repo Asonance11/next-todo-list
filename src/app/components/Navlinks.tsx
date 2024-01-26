@@ -1,25 +1,17 @@
-'use client';
-
-import { useSession } from 'next-auth/react';
+import { auth } from '@/auth';
 import Link from 'next/link';
-import { logout } from '../lib/actions';
+import LogoutButton from './LogoutButton';
 
-const Navlinks = () => {
+const Navlinks = async () => {
 	// const user = useCurrentUser();
-	const session = useSession();
-	const user = session.data?.user;
+	const session = await auth();
+	const user = session?.user;
 
 	if (user) {
 		return (
 			<ul className="flex items-center gap-6 ">
 				<li>
-					<button
-						onClick={() => {
-							logout();
-						}}
-					>
-						Logout
-					</button>
+					<LogoutButton />
 				</li>
 				<li>{user.username}</li>
 			</ul>
