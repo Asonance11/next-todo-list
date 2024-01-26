@@ -23,12 +23,10 @@ export default async function RootLayout({
 	return (
 		<SessionProvider session={session}>
 			<html lang="en">
-				<body className={`${inter.className} bg-zinc-900 text-neutral-50  `}>
+				<body className={`${inter.className} bg-white text-black`}>
 					<Navbar />
-					<div className="">
-						{children}
-						<Toaster position="top-right" richColors />
-					</div>
+					<div className="container mx-auto p-4">{children}</div>
+					<Toaster position="top-right" richColors />
 				</body>
 			</html>
 		</SessionProvider>

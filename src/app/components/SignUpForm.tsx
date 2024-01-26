@@ -16,7 +16,7 @@ export default function SignUpForm() {
 
 	return (
 		<>
-			<form action={clientAction} className="text-black">
+			<form action={clientAction} className="text-black ">
 				<input
 					type="text"
 					name="username"

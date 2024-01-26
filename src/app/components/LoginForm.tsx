@@ -15,21 +15,28 @@ export default function LoginForm() {
 	};
 
 	return (
-		<div>
+		<div className="max-w-sm mx-auto p-4 bg-white rounded shadow-md">
 			<form action={signin} className="text-black">
 				<input
 					type="text"
 					name="username"
 					id="username"
 					placeholder="Username"
+					className="w-full p-2 mb-2 border outline-none rounded focus:border-blue-500"
 				/>
 				<input
 					type="password"
 					name="password"
 					id="password"
 					placeholder="Password"
+					className="w-full p-2 mb-2 border rounded"
 				/>
-				<button type="submit">Sign in</button>
+				<button
+					type="submit"
+					className="w-full p-2 bg-blue-500 text-white rounded hover:bg-blue-600"
+				>
+					Sign in
+				</button>
 			</form>
 		</div>
 	);

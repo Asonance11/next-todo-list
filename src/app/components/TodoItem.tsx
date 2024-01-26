@@ -10,18 +10,20 @@ interface TodoItemProps {
 
 const TodoItem = ({ id, title, completed }: TodoItemProps) => {
 	return (
-		<li className="flex gap-1 items-center text-white">
+		<li className="flex items-center text-gray-800">
 			<input
 				type="checkbox"
 				name="completed"
 				id={id}
-				className="cursor-pointer peer"
+				className="mr-2 cursor-pointer"
 				defaultChecked={completed}
 				onChange={(e) => toggleTodo(id, e.target.checked)}
 			/>
 			<label
 				htmlFor={id}
-				className="cursor-pointer peer-checked:text-gray-400 peer-checked:line-through"
+				className={`cursor-pointer ${
+					completed ? 'line-through text-gray-400' : ''
+				}`}
 			>
 				{title}
 			</label>
