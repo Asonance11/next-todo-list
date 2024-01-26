@@ -17,7 +17,7 @@ This is a simple full-stack Todo List application built using Next.js and NextAu
 
 ## Setting up Authentication
 
-1. Update `.env.local` file with your authentication credentials:
+1. Update `.env` file with your authentication credentials:
 
    ```env
    DATABASE_URL=your-database-url
