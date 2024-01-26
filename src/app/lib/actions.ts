@@ -1,8 +1,9 @@
 'use server';
 
-import { signIn, signOut } from '@/auth';
+import { auth, signIn, signOut } from '@/auth';
 import bcrypt from 'bcrypt';
 import { AuthError } from 'next-auth';
+import { revalidatePath } from 'next/cache';
 import { redirect } from 'next/navigation';
 import prisma from './prisma';
 import { TodoSchema, UserSchema } from './zod.types';
@@ -91,7 +92,7 @@ export const login = async (formData: FormData) => {
 	}
 };
 
-const createTodo = async (formData: FormData) => {
+export const createTodo = async (formData: FormData) => {
 	const validatedTodo = TodoSchema.safeParse({
 		title: formData.get('title'),
 	});
@@ -109,6 +110,26 @@ const createTodo = async (formData: FormData) => {
 	}
 
 	const { title } = validatedTodo.data;
+	try {
+		const session = await auth();
+
+		if (!session?.user) {
+			return {
+				error: 'Login to continue',
+			};
+		}
+
+		await prisma.todo.create({
+			data: {
+				title: title,
+				userId: session.user.id,
+			},
+		});
+
+		revalidatePath('/dashboard');
+	} catch (error) {
+		throw error;
+	}
 };
 
 export const logout = async () => {
