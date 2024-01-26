@@ -1,36 +1,51 @@
-This is a [Next.js](https://nextjs.org/) project bootstrapped with [`create-next-app`](https://github.com/vercel/next.js/tree/canary/packages/create-next-app).
+# Next.js Todo List with Authentication
+
+This is a simple full-stack Todo List application built using Next.js and NextAuth for authentication. The project is created to help me practice Next.js framework and NextAuth(AuthJS) for implementing user authentication.
 
 ## Getting Started
 
-First, run the development server:
+1. **Clone the repository:**
 
-```bash
-npm run dev
-# or
-yarn dev
-# or
-pnpm dev
-# or
-bun dev
-```
+   ```bash
+   git clone https://github.com/Asonance11/next-todo-list
+   ```
 
-Open [http://localhost:3000](http://localhost:3000) with your browser to see the result.
+2. **Install dependencies:**
+   ```bash
+   npm install
+   ```
 
-You can start editing the page by modifying `app/page.tsx`. The page auto-updates as you edit the file.
+## Setting up Authentication
 
-This project uses [`next/font`](https://nextjs.org/docs/basic-features/font-optimization) to automatically optimize and load Inter, a custom Google Font.
+1. Update `.env.local` file with your authentication credentials:
 
-## Learn More
+   ```env
+   DATABASE_URL=your-database-url
+   AUTH_SECRET=your-auth-secret
+   NEXT_AUTH_JWT_SECRET=yout-jwt-secret
+   ```
 
-To learn more about Next.js, take a look at the following resources:
+2. **Start the development server:**
 
-- [Next.js Documentation](https://nextjs.org/docs) - learn about Next.js features and API.
-- [Learn Next.js](https://nextjs.org/learn) - an interactive Next.js tutorial.
+   ```bash
+   npm run dev
+   ```
 
-You can check out [the Next.js GitHub repository](https://github.com/vercel/next.js/) - your feedback and contributions are welcome!
+3. Visit [http://localhost:3000](http://localhost:3000) in your browser to see the Todo List app with authentication.
 
-## Deploy on Vercel
+## Usage
 
-The easiest way to deploy your Next.js app is to use the [Vercel Platform](https://vercel.com/new?utm_medium=default-template&filter=next.js&utm_source=create-next-app&utm_campaign=create-next-app-readme) from the creators of Next.js.
+1. Register or log in using the authentication provider you configured.
 
-Check out our [Next.js deployment documentation](https://nextjs.org/docs/deployment) for more details.
+2. Add and edit tasks in the Todo List.
+
+3. Log out when done.
+
+## Technologies Used
+
+- [Next.js](https://nextjs.org/) - React framework for building web applications.
+- [NextAuth(Auth.js)](https://authjs.dev/) - Authentication library for Next.js applications.
+
+## Contributing
+
+Feel free to contribute to the project by opening issues or submitting pull requests. We appreciate your feedback and support.
