@@ -1,3 +1,5 @@
+'use server';
+
 import prisma from './prisma';
 
 export const getUserById = async (id: string) => {
@@ -18,4 +20,15 @@ export const getTodos = async (id: string) => {
 	});
 
 	return todos;
+};
+
+export const toggleTodo = async (id: string, completed: boolean) => {
+	const todo = await prisma.todo.update({
+		where: {
+			id: id,
+		},
+		data: {
+			completed: completed,
+		},
+	});
 };
