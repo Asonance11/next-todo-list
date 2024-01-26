@@ -3,7 +3,6 @@
 import { auth, signIn, signOut } from '@/auth';
 import bcrypt from 'bcrypt';
 import { AuthError } from 'next-auth';
-import { revalidatePath } from 'next/cache';
 import { redirect } from 'next/navigation';
 import prisma from './prisma';
 import { TodoSchema, UserSchema } from './zod.types';
@@ -126,7 +125,7 @@ export const createTodo = async (formData: FormData) => {
 			},
 		});
 
-		revalidatePath('/dashboard');
+		redirect('/dashboard');
 	} catch (error) {
 		throw error;
 	}
