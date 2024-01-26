@@ -9,3 +9,13 @@ export const getUserById = async (id: string) => {
 
 	return user;
 };
+
+export const getTodos = async (id: string) => {
+	const todos = await prisma.todo.findMany({
+		where: {
+			userId: id,
+		},
+	});
+
+	return todos;
+};
