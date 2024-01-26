@@ -1,3 +1,7 @@
+'use client';
+
+import { toggleTodo } from '../lib/data';
+
 interface TodoItemProps {
 	id: string;
 	title: string;
@@ -12,6 +16,8 @@ const TodoItem = ({ id, title, completed }: TodoItemProps) => {
 				name="completed"
 				id={id}
 				className="cursor-pointer peer"
+				defaultChecked={completed}
+				onChange={(e) => toggleTodo(id, e.target.checked)}
 			/>
 			<label
 				htmlFor={id}
