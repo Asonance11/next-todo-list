@@ -1,18 +1,17 @@
-'use client';
+"use client";
 
-import { logout } from '../lib/actions';
+import { logout } from "../lib/actions";
 
 const LogoutButton = () => {
-	return (
-		<button
-			onClick={() => {
-				logout();
-			}}
-			className="text-blue-500 hover:underline"
-		>
-			Logout
-		</button>
-	);
+  return (
+    <button
+      onClick={() => {
+        logout();
+      }}
+    >
+      Logout
+    </button>
+  );
 };
 
 export default LogoutButton;
